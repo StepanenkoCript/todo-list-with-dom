@@ -1,4 +1,4 @@
-------------------------------To do list using vanilla JavaScript and Dom manipulation.![Animation]--------------------
+------------------------------To do list using vanilla JavaScript and Dom manipulation!--------------------
 
 
 ![](https://user-images.githubusercontent.com/80807495/116341954-316d4d80-a7b8-11eb-9859-248871965bee.gif)
@@ -20,7 +20,7 @@ Very simple :) just open  "index.html" and start recording your daily tasks :D
 
 
 -----------------PROJECT STATUS:
-- 90% of this project are done, just minor stuff to chance.
+- 90% of this project are done, just minor stuff to change.
 
 
 ----------------- WHAT IM USING ON THIS PROJECT:
