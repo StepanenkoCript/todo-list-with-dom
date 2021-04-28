@@ -27,7 +27,6 @@ body {
   font-family: "BioRhyme", serif;
   color: #F6F1D1;
   text-align: center;
-  
 }
 
 .form {
@@ -94,19 +93,26 @@ body {
 }
 
 .form-button {
-  border: 1px;
+  border: 2px solid rgb(21 31 56 / 80%) !important;
+  border-radius: 5px;
   color: #ec9785;
-  background:#a73855;
+  background: #a73855;
   text-transform: uppercase;
   font-family: "Montserrat";
   font-weight: bold;
   cursor: pointer;
   margin-left: 0.25rem;
+  border-radius: 6px;
+  display: inline-block;
+  transition: all 0.3s ease 0s;
 }
 
 .form-button:hover {
   color: #c2b2fb;
   background: rgba(246, 241, 209, 0.1);
+  border-radius: 50px;
+  border-color: #a73855 !important;
+  transition: all 0.3s ease 0s;
 }
 
 .list {
@@ -118,6 +124,7 @@ body {
 }
 
 .task {
+  display: flex;
   background-color: rgba(255, 255, 255, 0.1);
   color: #F6F1D1;
   margin-bottom: 0.5rem;
@@ -125,18 +132,23 @@ body {
 }
 
 .check-button, .delete-button {
-  float: right;
-  position: relative;
-  font-family: "montserrat";
-  font-weight: bold;
   margin-left: 2px;
-  left: 45px;
   background-color: #99a8bb;
-  border: none;
+  border: 2px solid rgb(21 31 56 / 80%) !important;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   outline: none;
-  border-radius: 2px;
-  cursor: pointer;  
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+/* com esse div P eu consegui setar o width: 100% e manter os botões sempre na direita*/
+
+.check-button:hover, .delete-button:hover {
+  border-radius: 10px;
+  border-color: #a73855 !important;
+  transition: all 0.3s ease 0s;
+  background: rgba(246, 241, 209, 0.1);
 }
 
 .task.done .check-button {
@@ -158,11 +170,11 @@ body {
   background-color: #0B2027;
 }
 
-.content {
-  margin: 0;
-  display: inline;
+.divp {
+  width: 100%;
 }
 
-.task.done .content {
+.task.done .divp {
   text-decoration: line-through;
+  color: #f6f1d167;
 }

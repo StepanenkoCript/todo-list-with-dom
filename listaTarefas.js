@@ -6,14 +6,16 @@ const criarTarefa = (evento) => {
     const tarefa = document.createElement('li'); // alem de métodos pra percorrer o dom, existe outros pra criar elementos no dom, como o createElement, e estamos criando uma <li>
     tarefa.classList.add('task') //adiciona a classe de CSS que ja tinha antes nessa LI
 
-    const conteudo = `<p class="content">${valor}</p>`; //inclui parágrafo no conteudo da LI. Poderia apenas incluir o valor sem o parágrafo mas perderia a formatação do parágrafo e o estilo css que será usado posteriormente.
+    
+
+    const conteudo = `<div class="divp">${valor}</div>`; //inclui parágrafo no conteudo da LI. Poderia apenas incluir o valor sem o parágrafo mas perderia a formatação do parágrafo e o estilo css que será usado posteriormente.
     tarefa.innerHTML = conteudo;
 
-    tarefa.appendChild(BotaoDeleta());
-    tarefa.appendChild(BotaoConclui()); // coloca o botão na hierarquia da LI e já chama ele "()" assim que eu crio uma nova tarefa
+    tarefa.appendChild(BotaoConclui());
+    tarefa.appendChild(BotaoDeleta());// coloca o botão na hierarquia da LI e já chama ele "()" assim que eu crio uma nova tarefa
     //tarefa.insertBefore(BotaoConclui(),tarefa.childNodes[0]); // coloca o botão DELETE primeiro antes de tudo, da lista, e do outro botão (CARALHO MANO EU TO MTO FELIZ)
 
-    lista.appendChild(tarefa); // o APPENDCHILD vai colocar sempre o item no fim do nó (elemento filho), ou seja, na proxima linha.
+    lista.appendChild(tarefa); // o APPENDCHILD vai colocar sempre o item no fim do nó (elemento filho), ou seja, na proxima linha.    
 }
 
 //const novaTarefa = document.querySelector(".form-button"); forma antiga que não valida o campo em branco
@@ -38,8 +40,8 @@ document.getElementById("form").addEventListener("submit", (e) => { // pega o FO
 const BotaoConclui = () => { // criando um botão que irá concluir a tarefa e riscar ela assim que clicarmos
     const botaoConclui = document.createElement('button'); // cria um elemento button
 
-    botaoConclui.classList.add('check-button'); // adicionamos a classe CSS
-    botaoConclui.innerText = 'concluir'; // da um texto pro botão
+    botaoConclui.classList.add('check-button'); // adicionamos a classe CSS    
+    botaoConclui.innerText = 'done'; // da um texto pro botão
 
     botaoConclui.addEventListener('click', concluirTarefa); // ao clicar, chama o const concluirTarefa abaixo
 
@@ -58,7 +60,7 @@ const BotaoDeleta = () => {
     const botaoDeleta = document.createElement('button');
 
     botaoDeleta.classList.add('delete-button');
-    botaoDeleta.innerText = 'deletar';
+    botaoDeleta.innerText = 'del';
 
     botaoDeleta.addEventListener('click', deletarTarefa)
 
