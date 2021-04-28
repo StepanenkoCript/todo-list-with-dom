@@ -15,12 +15,15 @@ I hope you like it!
 -----------------HOW TO USE:
 
 Very simple :) just open  "index.html" and start recording your daily tasks :D
+Or you can enter here: https://stepanenkocript.github.io/todo-list-with-dom/
 
 
 
 
 -----------------PROJECT STATUS:
 - 90% of this project are done, just minor stuff to change.
+
+
 
 
 ----------------- WHAT IM USING ON THIS PROJECT:
