@@ -1,7 +1,7 @@
 ------------------------------To do list using vanilla JavaScript and Dom manipulation.![Animation]---------------------------------
 
 
-(https://user-images.githubusercontent.com/80807495/116341954-316d4d80-a7b8-11eb-9859-248871965bee.gif)
+![](https://user-images.githubusercontent.com/80807495/116341954-316d4d80-a7b8-11eb-9859-248871965bee.gif)
 
 
 Hey guys!
