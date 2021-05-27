@@ -3,6 +3,11 @@
 
 ![](https://user-images.githubusercontent.com/80807495/116341954-316d4d80-a7b8-11eb-9859-248871965bee.gif)
 
+-------------UPDATE:------------- 
+Now your favorite todo list is even better! :D
+Using local storage and calendar input, you can write down your tasks by the date and time, and they will be saved, even if you close the browser or press F5! ;)
+Try it!
+
 
 Hey guys!
 
