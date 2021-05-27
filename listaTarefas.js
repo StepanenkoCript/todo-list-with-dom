@@ -1,25 +1,95 @@
 const criarTarefa = (evento) => {
-    const lista = document.querySelector(".list") // busca o elemento da <UL>
+    const tarefas = JSON.parse(localStorage.getItem('tarefas')) || []; //transforma tudo que é string em objeto denovo
     const input = document.querySelector(".form-input"); // busca o elemento da caixa de texto
     const valor = input.value; // define o que será escrito na caixa de texto
 
-    const tarefa = document.createElement('li'); // alem de métodos pra percorrer o dom, existe outros pra criar elementos no dom, como o createElement, e estamos criando uma <li>
-    tarefa.classList.add('task') //adiciona a classe de CSS que ja tinha antes nessa LI
+    const calendario = document.querySelector(".form-date") // busca o elemento do calendario
+    const data = moment(calendario.value) // pegar o valor que foi definido no calendario
+    const horario = data.format('HH:mm')
+    const dataFormatada = data.format('DD/MM') // formato de como aparecerá a data
 
-    
+    const concluida = false
 
-    const conteudo = `<div class="divp">${valor}</div>`; //inclui parágrafo no conteudo da LI. Poderia apenas incluir o valor sem o parágrafo mas perderia a formatação do parágrafo e o estilo css que será usado posteriormente.
-    tarefa.innerHTML = conteudo;
+    const dados = { // criei uma nova const com os valores que preciso pra sessionStorage e stringify
+        valor,
+        dataFormatada,
+        horario,
+        concluida
+    }
 
-    tarefa.appendChild(BotaoConclui());
-    tarefa.appendChild(BotaoDeleta());// coloca o botão na hierarquia da LI e já chama ele "()" assim que eu crio uma nova tarefa
-    //tarefa.insertBefore(BotaoConclui(),tarefa.childNodes[0]); // coloca o botão DELETE primeiro antes de tudo, da lista, e do outro botão (CARALHO MANO EU TO MTO FELIZ)
+    const tarefasAtualizadas = [...tarefas, dados]; //cria um array com o que foi digitado no const dados e tarefas
 
-    lista.appendChild(tarefa); // o APPENDCHILD vai colocar sempre o item no fim do nó (elemento filho), ou seja, na proxima linha.    
+    localStorage.setItem("tarefas", JSON.stringify(tarefasAtualizadas)) // transforma objetos em strings e armazena no navegador
+
+    carregaTarefa()
 }
 
-//const novaTarefa = document.querySelector(".form-button"); forma antiga que não valida o campo em branco
-//novaTarefa.addEventListener('click', criarTarefa); forma antiga que não valida o campo em branco
+const removeDatasRepetidas = (datas) => {
+    const datasUnicas = []
+    datas.forEach((data => {
+        if (datasUnicas.indexOf(data.dataFormatada) === -1) {
+            datasUnicas.push(data.dataFormatada)
+        }
+    }))
+    return datasUnicas
+}
+
+const ordenaDatas = (data) => {
+    data.sort((a, b) => {
+        const primeiraData = moment(a, 'DD/MM/YYY').format('YYYYMMDD')
+        const segundaData = moment(b, 'DD/MM/YYY').format('YYYYMMDD')
+        return primeiraData - segundaData
+    })
+}
+
+const Tarefa = ({ valor, horario, concluida }, id) => {
+    const tarefa = document.createElement('li') // alem de métodos pra percorrer o dom, existe outros pra criar elementos no dom, como o createElement, e estamos criando uma <li>
+
+    const conteudo = `<div class="divp">${horario} - ${valor}</div>`; //inclui parágrafo no conteudo da LI. Poderia apenas incluir o valor sem o parágrafo mas perderia a formatação do parágrafo e o estilo css que será usado posteriormente.
+    if (concluida) {
+        tarefa.classList.add('done')//adiciona a classe de CSS que ja tinha antes nessa LI
+    }
+
+    tarefa.classList.add('task')
+    tarefa.innerHTML = conteudo
+
+    tarefa.appendChild(BotaoConclui(carregaTarefa, id));
+    tarefa.appendChild(BotaoDeleta(carregaTarefa, id)); // coloca o botão na hierarquia da LI e já chama ele "()" assim que eu crio uma nova tarefa
+
+    return tarefa
+}
+
+const carregaTarefa = () => {
+    const lista = document.querySelector(".list");
+
+    const tarefasCadastradas = JSON.parse(localStorage.getItem('tarefas')) || [];
+    lista.innerHTML = ""
+    const datasUnicas = removeDatasRepetidas(tarefasCadastradas)
+    ordenaDatas(datasUnicas)
+    datasUnicas.forEach((dia) => {
+        lista.appendChild(criaData(dia))
+    })
+}
+
+const criaData = (data) => {
+    const tarefas = JSON.parse(localStorage.getItem('tarefas')) || []
+    const dataMoment = moment(data, 'DD/MM/YYY')
+    const dataTopo = document.createElement('li')
+    const conteudo = `<p class="content-data">${dataMoment.format('DD/MM/YYYY')}</p>`
+
+    dataTopo.innerHTML = conteudo
+
+    tarefas.forEach(((tarefa, id) => {
+        const dia = moment(tarefa.dataFormatada, 'DD/MM/YYY')
+        const diff = dataMoment.diff(dia)
+        if (diff === 0) {
+            dataTopo.appendChild(Tarefa(tarefa, id))
+        }
+    }))
+
+    return dataTopo
+
+}
 
 
 document.getElementById("form").addEventListener("submit", (e) => { // pega o FORM (UL) e clia um "escutador" pra quando enviar
@@ -30,50 +100,55 @@ document.getElementById("form").addEventListener("submit", (e) => { // pega o FO
         input.style.border = "solid 1px #ff0000"
         alert("Preencha o Input")
     } else {
-    input.style.border = "solid 1px #000"
-    criarTarefa(input.value)
-    input.value = ""
-    input.focus() 
+        input.style.border = "solid 1px #000"
+        criarTarefa(input.value)
+        input.value = ""
+        input.focus()
     }
 })
 
-const BotaoConclui = () => { // criando um botão que irá concluir a tarefa e riscar ela assim que clicarmos
+const BotaoConclui = (atualiza, id) => { // criando um botão que irá concluir a tarefa e riscar ela assim que clicarmos
     const botaoConclui = document.createElement('button'); // cria um elemento button
 
     botaoConclui.classList.add('check-button'); // adicionamos a classe CSS    
     botaoConclui.innerText = 'done'; // da um texto pro botão
 
-    botaoConclui.addEventListener('click', concluirTarefa); // ao clicar, chama o const concluirTarefa abaixo
+    botaoConclui.addEventListener('click', () => concluirTarefa(atualiza, id)); // ao clicar, chama o const concluirTarefa abaixo
 
     return botaoConclui;
 }
 
-const concluirTarefa = (evento) => {
-    const botaoConclui = evento.target; // eu quero saber em quem eu cliquei, isso porque vamos usar uma estratégia de subir um nó na arvore do DOM, pq vou colocar o estilo de rabisco na LI
+const concluirTarefa = (atualiza, id) => {
+    const tarefasCadastradas = JSON.parse(localStorage.getItem('tarefas'))
 
-    const tarefaCompleta = botaoConclui.parentElement; // pega o pai do elemento que eu cliquei, ou seja, o pai do botão. O pai do botão é a LI.
+    tarefasCadastradas[id].concluida = !tarefasCadastradas[id].concluida
+    localStorage.setItem('tarefas', JSON.stringify(tarefasCadastradas))
 
-    tarefaCompleta.classList.toggle('done'); // o método toggle executa uma classe CSS a partir do momento que eu clicar no botão. Dá um booleano de verdadeiro ou falso.
+    atualiza()
+
 }
 
-const BotaoDeleta = () => {
+const BotaoDeleta = (atualiza, id) => {
     const botaoDeleta = document.createElement('button');
 
     botaoDeleta.classList.add('delete-button');
     botaoDeleta.innerText = 'del';
 
-    botaoDeleta.addEventListener('click', deletarTarefa)
+    botaoDeleta.addEventListener('click', () => deletarTarefa(atualiza, id))
 
     return botaoDeleta;
 }
 
-const deletarTarefa = (evento) => {
-    const botaoDeleta = evento.target;
+const deletarTarefa = (atualiza, id) => {
+    const index = id
+    const tarefasCadastradas = JSON.parse(localStorage.getItem('tarefas'))
+    tarefasCadastradas.splice(index, 1)
+    localStorage.setItem('tarefas', JSON.stringify(tarefasCadastradas))
+    atualiza()
 
-    const tarefaCompleta = botaoDeleta.parentElement;
-
-    tarefaCompleta.remove();
 }
+
+carregaTarefa()
 
 
 

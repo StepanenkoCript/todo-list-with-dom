@@ -79,8 +79,7 @@ body {
   justify-content: center;
 }
 
-.form-input, .form-button {
-  border-radius: 0;
+.form-input, .form-button {  
   padding: 0.75rem;
   font-size: 0.75rem;
 }
@@ -101,8 +100,7 @@ body {
   font-family: "Montserrat";
   font-weight: bold;
   cursor: pointer;
-  margin-left: 0.25rem;
-  border-radius: 6px;
+  margin-left: 0.25rem;  
   display: inline-block;
   transition: all 0.3s ease 0s;
 }
@@ -177,4 +175,20 @@ body {
 .task.done .divp {
   text-decoration: line-through;
   color: #f6f1d167;
+}
+
+.content-data {
+  color: #F6F1D1;
+}
+
+.form-date {
+  margin-left: 5px;
+  border-radius: 0;
+  padding: 0.70rem;
+  font-size: 0.70rem;
+  flex: 0.5;
+  outline: none;
+  background-color: #b67d86;
+  border-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
 }
