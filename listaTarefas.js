@@ -36,8 +36,8 @@ const removeDatasRepetidas = (datas) => {
 
 const ordenaDatas = (data) => {
     data.sort((a, b) => {
-        const primeiraData = moment(a, 'DD/MM/YYY').format('YYYYMMDD')
-        const segundaData = moment(b, 'DD/MM/YYY').format('YYYYMMDD')
+        const primeiraData = moment(a, 'DD/MM/YYYY').format('YYYYMMDD')
+        const segundaData = moment(b, 'DD/MM/YYYY').format('YYYYMMDD')
         return primeiraData - segundaData
     })
 }
@@ -80,7 +80,7 @@ const criaData = (data) => {
     dataTopo.innerHTML = conteudo
 
     tarefas.forEach(((tarefa, id) => {
-        const dia = moment(tarefa.dataFormatada, 'DD/MM/YYY')
+        const dia = moment(tarefa.dataFormatada, 'DD/MM/YYYY')
         const diff = dataMoment.diff(dia)
         if (diff === 0) {
             dataTopo.appendChild(Tarefa(tarefa, id))
