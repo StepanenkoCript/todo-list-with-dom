@@ -79,20 +79,20 @@ body {
   justify-content: center;
 }
 
-.form-input, .form-button {  
+.form-input, .form-button {
   padding: 0.75rem;
   font-size: 0.75rem;
 }
 
 .form-input {
-  flex: 0.7;
+  flex: 0.9;
   outline: none;
   background-color: #99a8bb;
   border-color: rgba(255, 255, 255, 0.1);
 }
 
 .form-button {
-  border: 2px solid rgb(21 31 56 / 80%) !important;
+  border: 2px solid #5a2e42 !important;
   border-radius: 5px;
   color: #ec9785;
   background: #a73855;
@@ -100,7 +100,7 @@ body {
   font-family: "Montserrat";
   font-weight: bold;
   cursor: pointer;
-  margin-left: 0.25rem;  
+  margin-left: 0.25rem;
   display: inline-block;
   transition: all 0.3s ease 0s;
 }
@@ -111,6 +111,30 @@ body {
   border-radius: 50px;
   border-color: #a73855 !important;
   transition: all 0.3s ease 0s;
+}
+
+.form-date {
+  margin-left: 0.25rem;
+  padding: 0;
+  font-size: 0.73rem;
+  flex: 0.65;
+  background-color: #b67d86;
+  border-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+::-webkit-calendar-picker-indicator {
+  margin-left: 0px;
+  margin-right: -2px;
+}
+
+::-webkit-datetime-edit {
+  font-family: "Space Mono", monospace;
+  color: #2e121a
+}
+
+.content-data {
+  font-size: .8rem;
 }
 
 .list {
@@ -130,9 +154,13 @@ body {
 }
 
 .check-button, .delete-button {
-  margin-left: 2px;
-  background-color: #99a8bb;
-  border: 2px solid rgb(21 31 56 / 80%) !important;
+  padding: .25rem;
+  text-transform: uppercase;
+  font-size: 0.70rem;
+  margin-left: 0.25rem;
+  background-color: #5a2e42;
+  color: #F6F1D1;
+  border: 2px solid rgb(167 56 85) !important;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   outline: none;
   border-radius: 5px;
@@ -140,13 +168,20 @@ body {
   transition: all 0.3s ease 0s;
 }
 
-/* com esse div P eu consegui setar o width: 100% e manter os botões sempre na direita*/
+.check-button {
+  margin-left: 1rem;
+}
+
+.delete-button {
+  margin-right: -20px;
+}
 
 .check-button:hover, .delete-button:hover {
   border-radius: 10px;
   border-color: #a73855 !important;
   transition: all 0.3s ease 0s;
   background: rgba(246, 241, 209, 0.1);
+  color: #c2b2fb;
 }
 
 .task.done .check-button {
@@ -168,8 +203,11 @@ body {
   background-color: #0B2027;
 }
 
+/* com esse div P eu consegui setar o width: 100% e manter os botões sempre na direita*/
+
 .divp {
   width: 100%;
+  margin-left: -20px;
 }
 
 .task.done .divp {
@@ -179,16 +217,4 @@ body {
 
 .content-data {
   color: #F6F1D1;
-}
-
-.form-date {
-  margin-left: 5px;
-  border-radius: 0;
-  padding: 0.70rem;
-  font-size: 0.70rem;
-  flex: 0.5;
-  outline: none;
-  background-color: #b67d86;
-  border-color: rgba(255, 255, 255, 0.1);
-  cursor: pointer;
 }
